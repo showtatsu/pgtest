@@ -1,0 +1,93 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja-JP" xml:lang="ja-JP">
+<head>
+<title>DBD::Pg test site</title>
+<meta http-equiv="Content-Type" content="text/html; charset=[% GET charset %]" />
+<link rel="stylesheet" type="text/css" href="[% GET root_url %]/res/style.css" />
+</head>
+<body>
+
+<h1>DBD::Pgの文字コードとCGI::Application周りのテスト</h1>
+<a href="[% GET script_name %]/show">[show]</a>
+<a href="[% GET script_name %]/insert">[insert]</a>
+<a href="[% GET script_name %]/purge">[purge]</a>
+
+[% IF SHOW_INSERT %]
+<h2>データの登録</h2>
+<form
+	method="post"
+	action="[% GET script_name %]/insert"
+	enctype="multipart/form-data">
+	<input type="hidden" name="action" value="insert" />
+	<table class="insert">
+		<tr>
+			<td><label for="entry_id">ID</label></td>
+			<td>
+				<input type="text" name="id"
+					size="8" maxlength="8" id="entry_id" />
+			</td>
+		</tr>
+		<tr>
+			<td><label for="entry_meta">Meta</label></td>
+			<td>
+				<input type="text" name="entry_meta"
+					size="32" maxlength="32" id="entry_meta" />
+				</td>
+		</tr>
+		<tr>
+			<td><label for="entry_text">Text</label></td>
+			<td>
+				<input type="text" name="entry_text"
+					size="32" maxlength="32" id="entry_text" />
+				</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" name="insert_entry" value="Insert" />
+			</td>
+		</tr>
+	</table>
+</form>
+</table>
+[% END %]
+[% IF SHOW_PURGE %]
+<h2>全データの削除</h2>
+<form method="post"
+	action="[% GET script_name %]/purge"
+	enctype="multipart/form-data">
+	<input type="hidden" name="action" value="purge" />
+	<input type="submit" name="purge" value="Purge" />
+</form>
+</table>
+[% END %]
+[% IF message %]
+<h2>通知</h2>
+<pre>
+[% GET message %]
+</pre>
+[% END %]
+
+<h2>データリスト</h2>
+<table class="view">
+<thead>
+	<tr>
+		<th>id</th>
+		<th>text1</th>
+		<th>text2</th>
+	</tr>
+</thead>
+<tbody>
+	[% FOREACH data_list %]
+	<tr>
+		<td>[% GET data_id %]</td>
+		<td>[% GET data_meta %]</td>
+		<td>[% GET data_text %]</td>
+	</tr>
+	[% END %]
+</tbody>
+</table>
+
+</body>
+</html>

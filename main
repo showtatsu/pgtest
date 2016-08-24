@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use lib qw(./lib);
+use PgTest;
+
+my $app = PgTest->new(
+    config_file => './conf/Config.pgtest.yaml',
+    css_url => '/pgtest/res/style.css',
+);
+$app->run();
+

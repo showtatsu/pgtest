@@ -1,0 +1,4 @@
+<FilesMatch main>
+    SetHandler cgi-script
+    AcceptPathInfo On
+</FilesMatch>
